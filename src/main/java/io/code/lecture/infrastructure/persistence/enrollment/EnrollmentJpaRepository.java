@@ -17,9 +17,4 @@ public interface EnrollmentJpaRepository extends JpaRepository<EnrollmentEntity,
     // 특정 강의의 신청 목록
     List<EnrollmentEntity> findByLectureId(Long lectureId);
     
-    // 사용자의 특정 강의 신청 여부
-    @Query("SELECT CASE WHEN COUNT(e) > 0 THEN true ELSE false END " +
-           "FROM EnrollmentEntity e " +
-           "WHERE e.userId = :userId AND e.lectureId = :lectureId")
-    boolean isEnrolled(@Param("userId") Long userId, @Param("lectureId") Long lectureId);
 }
