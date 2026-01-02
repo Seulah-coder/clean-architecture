@@ -77,9 +77,6 @@ class EnrollmentConcurrencyTest {
         assertThat(successCount.get()).isEqualTo(30);
         assertThat(failCount.get()).isEqualTo(10);
 
-        int enrollmentCount = enrollmentRepository.countByLectureId(lecture.getId());
-        assertThat(enrollmentCount).isEqualTo(30);
-
         Lecture updatedLecture = lectureRepository.findById(lecture.getId()).orElseThrow();
         assertThat(updatedLecture.getCurrentEnrollment()).isEqualTo(30);
         assertThat(updatedLecture.canEnroll()).isFalse();
@@ -121,7 +118,7 @@ class EnrollmentConcurrencyTest {
         assertThat(successCount.get()).isEqualTo(1);
         assertThat(failCount.get()).isEqualTo(1);
 
-        int enrollmentCount = enrollmentRepository.countByLectureId(lecture.getId());
-        assertThat(enrollmentCount).isEqualTo(30);
+        Lecture updatedLecture = lectureRepository.findById(lecture.getId()).orElseThrow();
+        assertThat(updatedLecture.getCurrentEnrollment()).isEqualTo(30);
     }
 }

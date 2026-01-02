@@ -47,13 +47,6 @@ class EnrollmentRepositoryFailureTest {
     }
 
     @Test
-    @DisplayName("신청자 없는 특강 카운트는 0")
-    void countByLectureId_zero() {
-        int count = enrollmentRepository.countByLectureId(lecture.getId());
-        assertThat(count).isEqualTo(0);
-    }
-
-    @Test
     @DisplayName("신청하지 않은 조합은 false")
     void existsByUserIdAndLectureId_false() {
         boolean exists = enrollmentRepository.existsByUserIdAndLectureId(1L, lecture.getId());

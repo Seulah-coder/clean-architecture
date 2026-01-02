@@ -160,55 +160,7 @@ class EnrollmentRepositoryImplTest {
     }
 
     @Test
-    @DisplayName("특강별 신청자 수 카운트")
-    void countByLectureId() {
-        // given
-        // lecture1에 3명 신청
-        enrollmentRepository.save(Enrollment.builder()
-                .userId(user1.getId())
-                .lectureId(lecture1.getId())
-                .build());
-        enrollmentRepository.save(Enrollment.builder()
-                .userId(user2.getId())
-                .lectureId(lecture1.getId())
-                .build());
 
-        // user3 추가
-        User user3 = userRepository.save(User.builder()
-                .name("이영희")
-                .email("lee@example.com")
-                .build());
-        enrollmentRepository.save(Enrollment.builder()
-                .userId(user3.getId())
-                .lectureId(lecture1.getId())
-                .build());
-
-        // lecture2에 1명 신청
-        enrollmentRepository.save(Enrollment.builder()
-                .userId(user1.getId())
-                .lectureId(lecture2.getId())
-                .build());
-
-        // when
-        int lecture1Count = enrollmentRepository.countByLectureId(lecture1.getId());
-        int lecture2Count = enrollmentRepository.countByLectureId(lecture2.getId());
-
-        // then
-        assertThat(lecture1Count).isEqualTo(3);
-        assertThat(lecture2Count).isEqualTo(1);
-    }
-
-    @Test
-    @DisplayName("존재하지 않는 특강의 신청자 수는 0")
-    void countByLectureId_not_exists() {
-        // when
-        int count = enrollmentRepository.countByLectureId(999L);
-
-        // then
-        assertThat(count).isEqualTo(0);
-    }
-
-    @Test
     @DisplayName("사용자가 신청한 특강이 없으면 빈 리스트 반환")
     void findByUserId_empty() {
         // when

@@ -38,9 +38,4 @@ public class EnrollmentRepositoryImpl implements EnrollmentRepository {
             .map(EnrollmentEntity::toDomain)
             .collect(Collectors.toList());
     }
-    
-    @Override
-    public int countByLectureId(Long lectureId) {
-        return jpaRepository.countByLectureId(lectureId);
-    }
 }

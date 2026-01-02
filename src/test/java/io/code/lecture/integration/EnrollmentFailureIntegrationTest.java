@@ -79,8 +79,8 @@ class EnrollmentFailureIntegrationTest {
                 .isInstanceOf(DuplicateEnrollmentException.class)
                 .hasMessageContaining("이미 신청한 특강입니다");
 
-        int count = enrollmentRepository.countByLectureId(lectureId);
-        assertThat(count).isEqualTo(1);
+        Lecture updatedLecture = lectureRepository.findById(lectureId).orElseThrow();
+        assertThat(updatedLecture.getCurrentEnrollment()).isEqualTo(1);
     }
 
     @Test
@@ -103,8 +103,8 @@ class EnrollmentFailureIntegrationTest {
         assertThatThrownBy(() -> enrollmentService.enroll(command31))
                 .isInstanceOf(EnrollmentFullException.class);
 
-        int count = enrollmentRepository.countByLectureId(lectureId);
-        assertThat(count).isEqualTo(30);
+        Lecture updatedLecture = lectureRepository.findById(lectureId).orElseThrow();
+        assertThat(updatedLecture.getCurrentEnrollment()).isEqualTo(30);
     }
 
     @Test

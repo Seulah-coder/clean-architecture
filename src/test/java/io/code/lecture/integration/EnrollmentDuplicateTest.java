@@ -82,8 +82,8 @@ class EnrollmentDuplicateTest {
         boolean exists = enrollmentRepository.existsByUserIdAndLectureId(userId, lecture.getId());
         assertThat(exists).isTrue();
 
-        int totalEnrollments = enrollmentRepository.countByLectureId(lecture.getId());
-        assertThat(totalEnrollments).isEqualTo(1);
+        Lecture updatedLecture = lectureRepository.findById(lecture.getId()).orElseThrow();
+        assertThat(updatedLecture.getCurrentEnrollment()).isEqualTo(1);
     }
 
     @Test
@@ -109,8 +109,8 @@ class EnrollmentDuplicateTest {
         enrollmentService.enroll(new EnrollmentCommand(user2, lecture.getId()));
         enrollmentService.enroll(new EnrollmentCommand(user3, lecture.getId()));
 
-        int totalEnrollments = enrollmentRepository.countByLectureId(lecture.getId());
-        assertThat(totalEnrollments).isEqualTo(3);
+        Lecture updatedLecture = lectureRepository.findById(lecture.getId()).orElseThrow();
+        assertThat(updatedLecture.getCurrentEnrollment()).isEqualTo(3);
 
         assertThat(enrollmentRepository.existsByUserIdAndLectureId(user1, lecture.getId())).isTrue();
         assertThat(enrollmentRepository.existsByUserIdAndLectureId(user2, lecture.getId())).isTrue();

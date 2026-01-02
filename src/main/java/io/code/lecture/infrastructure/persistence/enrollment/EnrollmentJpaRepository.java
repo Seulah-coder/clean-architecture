@@ -14,10 +14,6 @@ public interface EnrollmentJpaRepository extends JpaRepository<EnrollmentEntity,
     // 특정 사용자의 신청 목록
     List<EnrollmentEntity> findByUserId(Long userId);
     
-    // 특정 강의의 신청 수 (현재는 lectures 테이블의 current_enrollment 사용)
-    @Query("SELECT COUNT(e) FROM EnrollmentEntity e WHERE e.lectureId = :lectureId")
-    int countByLectureId(@Param("lectureId") Long lectureId);
-    
     // 사용자의 특정 강의 신청 여부
     @Query("SELECT CASE WHEN COUNT(e) > 0 THEN true ELSE false END " +
            "FROM EnrollmentEntity e " +
