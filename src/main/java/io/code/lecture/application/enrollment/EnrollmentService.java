@@ -20,6 +20,7 @@ public class EnrollmentService {
     private final LectureRepository lectureRepository;
     
     @Transactional
+    // 수강 신청
     public EnrollmentInfo enroll(EnrollmentCommand command) {
         Long userId = command.getUserId();
         Long lectureId = command.getLectureId();
@@ -48,6 +49,7 @@ public class EnrollmentService {
     }
     
     @Transactional(readOnly = true)
+    //신청한 강의 목록 조회
     public EnrollmentListResponse getEnrollments(Long userId) {
         List<Enrollment> enrollments = enrollmentRepository.findByUserId(userId);
         
