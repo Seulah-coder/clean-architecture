@@ -63,8 +63,10 @@ class EnrollmentConcurrencyTest {
                     EnrollmentCommand command = new EnrollmentCommand(userId, lecture.getId());
                     enrollmentService.enroll(command);
                     successCount.incrementAndGet();
+                    System.out.println("✅ User " + userId + " enrolled successfully");
                 } catch (Exception e) {
                     failCount.incrementAndGet();
+                    System.out.println("❌ User " + userId + " failed to enroll: " + e.getMessage());
                 } finally {
                     latch.countDown();
                 }
