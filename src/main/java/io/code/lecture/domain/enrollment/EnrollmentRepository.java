@@ -7,4 +7,5 @@ public interface EnrollmentRepository {
     Enrollment save(Enrollment enrollment);
     boolean existsByUserIdAndLectureId(Long userId, Long lectureId);
     List<Enrollment> findByUserId(Long userId);
+    List<Enrollment> findByLectureId(Long lectureId);
 }

@@ -38,4 +38,11 @@ public class EnrollmentRepositoryImpl implements EnrollmentRepository {
             .map(EnrollmentEntity::toDomain)
             .collect(Collectors.toList());
     }
+    
+    @Override
+    public List<Enrollment> findByLectureId(Long lectureId) {
+        return jpaRepository.findByLectureId(lectureId).stream()
+            .map(EnrollmentEntity::toDomain)
+            .collect(Collectors.toList());
+    }
 }
